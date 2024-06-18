@@ -3,6 +3,8 @@
 #include <string.h>
 #include <locale.h>
 
+#define number 50
+
 /** Esse programa visa solucionar o problema de garantir um bom atendimentos aos clientes do Hotel Descanso Garantido,
     a partir das principais atividades hoteleiras tais como:
     - Reserva de quarto
@@ -48,8 +50,43 @@ typedef struct QUARTO{
     int status;
 }QUARTO;
 
+CLIENTE criarCliente(CLIENTE *cliente){
+    printf("Código do cliente:");
+    scanf("%d",-> cliente.codigo);
+    printf("Nome do Cliente: ");
+    scanf("%s",& cliente.nome);
+    printf("Sobrenome do cliente");
+    scanf("%s",& cliente.sobrenome);
+    printf("Endereço do cliente");
+}
+
+ESTADIA reservarEstadia(){
+}
+
+QUARTO criarQuarto(){
+}
+
+void hotelInfo(){
+    printf("Informações do Hotel\n\n");
+    printf("Localização: Centro de Itacaré - Bahia\n");
+    printf("Início da diária: 14:00\n");
+    printf("Fim da diária: 12:00\n");
+    printf("Sejam bem-vindos ao Hotel Descanso Garantido!\nTenham uma ótima estadia!");
+}
+
+int opt(){
+    printf("O que deseja fazer?\n");
+    printf("(1) Informações do Hotel\n(2)Cadastrar Cliente\n(3) Cadastrar Quarto(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Finalizar");
+}
+
+
+
 int main()
 {
-    printf("\n\n___|Hotel Descanso Garantido|___\n\n");
+    CLIENTE cliente[number];
+    QUARTO quarto[number];
+    ESTADIA estadia[number];
+    FUNCIONARIO funcionario[number];
+    printf("\n\n___|Hotel Descanso Gárantido|___\n\n");
 
 }
