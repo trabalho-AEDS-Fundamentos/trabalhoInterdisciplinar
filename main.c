@@ -99,6 +99,9 @@ int main()
     QUARTO quarto[number];
     ESTADIA estadia[number];
     FUNCIONARIO funcionario[number];
+    FILE *arquivo;
+
+
     printf("\n\n___|Hotel Descanso Gárantido|___\n\n", setlocale(LC_ALL, ""));
     printf("Seja bem-vindo ao nosso sistema de Auto-Atendimento!\n");
 
@@ -106,7 +109,7 @@ int main()
     int response = opt(&resp);
     switch(response){
     case 1:
-        hotelInfo(&valorDiaria);
+        hotelInfo(&valorDiaria, &arquivo);
         break;
     case 2:
         cadastrarCliente(cliente);
