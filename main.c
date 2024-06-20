@@ -86,7 +86,7 @@ int opt(int *resp){
     printf("(1) Informações do Hotel\n(2)Cadastrar Cliente\n(3) Cadastrar Quarto\n(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Finalizar\n");
     scanf("%d", resp);
 
-    return resp;
+    return *resp;
 }
 
 
