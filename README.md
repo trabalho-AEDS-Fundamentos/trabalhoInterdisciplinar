@@ -4,4 +4,5 @@ Trabalho interdisciplinar das disciplinas: Algoritmos e Estrutura de Dados e Fun
 
 ## Membros da equipe:
 **Guilherme de Almeida Rocha Vieira**
+
 **Lucas Gonçalves Dolabela**
