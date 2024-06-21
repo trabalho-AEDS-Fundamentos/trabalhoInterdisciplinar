@@ -50,14 +50,43 @@ typedef struct{
     int status;
 }QUARTO;
 
-CLIENTE cadastrarCliente(CLIENTE *cliente){
+void limparBuffer(){
+    int c;
+    while((c = getchar()) != '\n' && c != EOF);
+}
+
+
+CLIENTE cadastrarCliente(FILE *arquivo){
+    CLIENTE cliente;
+    printf("\n__Cadastro de Cliente__\n\n");
+
     printf("Código do cliente:");
-    scanf("%d", &cliente->codigo);
+    scanf("%d", &cliente.codigo);
+    limparBuffer();
+
     printf("Nome do Cliente: ");
-    scanf("%s", cliente->nome);
-    printf("Sobrenome do cliente");
-    scanf("%s", cliente->sobrenome);
-    printf("Endereço do cliente");
+    fgets(cliente.nome, sizeof(cliente.nome), stdin);
+    cliente.nome[strcspn(cliente.nome, "\n")] = '\0';
+
+    printf("Sobrenome do cliente: ");
+    fgets(cliente.sobrenome, sizeof(cliente.sobrenome), stdin);
+    cliente.sobrenome[strcspn(cliente.sobrenome, "\n")] = '\0';
+
+    printf("Endereço do cliente: ");
+    fgets(cliente.endereco, sizeof(cliente.endereco), stdin);
+    cliente.endereco[strcspn(cliente.endereco, "\n")] = '\0';
+
+    printf("Telefone do cliente: ");
+    scanf("%d", &cliente.telefone);
+    limparBuffer();
+
+    // Escrever os dados do cliente no arquivo
+    fprintf(arquivo, "Código: %d\n", cliente.codigo);
+    fprintf(arquivo, "Nome: %s\n", cliente.nome);
+    fprintf(arquivo, "Sobrenome: %s\n",cliente.sobrenome);
+    fprintf(arquivo, "Endereço: %s\n", cliente.endereco);
+    fprintf(arquivo, "Telefone: %d\n", cliente.telefone);
+    fprintf(arquivo, "---------------------\n");
 }
 
 FUNCIONARIO cadastrarFuncionario(){
@@ -68,6 +97,7 @@ ESTADIA reservarEstadia(){
 
 QUARTO cadastrarQuarto(){
 }
+
 
 /**Função que escreve as informações básicas do hotel.
    Como parâmetro, temos o ponteiro do valor da diária.
@@ -95,11 +125,7 @@ int main()
 {
     int resp = 0;
     float valorDiaria = 100.0;
-    CLIENTE cliente[number];
-    QUARTO quarto[number];
-    ESTADIA estadia[number];
-    FUNCIONARIO funcionario[number];
-    FILE *arquivo;
+    FILE *arquivoCliente, *arquivoFuncionario;
 
 
     printf("\n\n___|Hotel Descanso Gárantido|___\n\n", setlocale(LC_ALL, ""));
@@ -107,12 +133,20 @@ int main()
 
     while(resp != 6){
     int response = opt(&resp);
+    int numClientes = 0;
     switch(response){
     case 1:
-        hotelInfo(&valorDiaria, &arquivo);
+        hotelInfo(&valorDiaria);
         break;
     case 2:
-        cadastrarCliente(cliente);
+        arquivoCliente = fopen("clientes.txt", "a+");
+        if(arquivoCliente == NULL){
+            printf("Erro ao abrir o arquivo. \n");
+            break;
+        }
+        cadastrarCliente(arquivoCliente);
+        fclose(arquivoCliente);
+        numClientes++;
         break;
     case 3:
         cadastrarQuarto();
