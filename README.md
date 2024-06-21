@@ -12,4 +12,4 @@ Trabalho interdisciplinar das disciplinas: Algoritmos e Estrutura de Dados e Fun
 Software desenvolvido para facilitar a organização e melhorar a praticidade de cadastro de hóspedes para o Hotel Descanso Garantido
 
 ## Backlog do produto: 
-#https://github.com/orgs/trabalho-AEDS-Fundamentos/projects/1
+https://github.com/orgs/trabalho-AEDS-Fundamentos/projects/1
