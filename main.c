@@ -39,6 +39,7 @@ typedef struct {
     DATA entrada;
     DATA saida;
     int diarias;
+    int codigoCliente;
     int codigoQuarto;
 
 }ESTADIA;
@@ -89,13 +90,96 @@ CLIENTE cadastrarCliente(FILE *arquivo){
     fprintf(arquivo, "---------------------\n");
 }
 
-FUNCIONARIO cadastrarFuncionario(){
+FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
+
+    printf("Cadastro do Funcionário \n");
+
+    printf("Código do funcionário");
+    scanf("%d",& FUNCIONARIO.codigo);
+    limparBuffer();
+
+    printf("Nome do funcionário: ");
+    fgets(funcionario.nome, sizeof(funcionario.nome), stdin);
+    funcionario.nome[strcspn(funcionario.nome, "\n")] = '\0';
+    limparBuffer();
+
+    printf("Sobrenome do funcionário: ");
+    fgets(funcionario.nome, sizeof(funcionario.sobrenome), stdin);
+    funcionario.sobrenome[strcspn(funcionario.sobrenome, "\n")] = '\0';
+    limparBuffer();
+
+    printf("Telefone do funcionário: ");
+    scanf("%d",&FUNCIONARIO.telefone);
+    limparBuffer();
+
+    printf("Cargo do funcionário: ");
+    fgets(funcionario.nome, sizeof(funcionario.cargo), stdin);
+    funcionario.cargo[strcspn(funcionario.cargo, "\n")] = '\0';
+    limparBuffer();
+
+    //Escrevendo os dados do funcionário no arquivo.
+    fprintf(arquivo, "Código: %d\n", funcionario.codigo);
+    fprintf(arquivo, "Nome: %s\n", funcionario.nome);
+    fprintf(arquivo, "Sobrenome: %s\n", funcionario.sobrenome);
+    fprintf(arquivo, "Telefone: %d\n", funcionario.telefone);
+    fprintf(arquivo, "Cargo: %s\n", funcionario.cargo);
+    fprintf(arquivo, "Salário: %d\n", funcionario.salario);
+
+
 }
 
 ESTADIA reservarEstadia(){
+
+    int numeroquarto;
+    printf("Reserva de Estadia \n");
+
+    printf("Código da Estadia: ");
+    scanf("%d",&ESTADIA.codigo);
+    limparBuffer();
+
+    printf("Código do Cliente: ");
+    scanf("%d",&ESTADIA.codigoCliente);
+    limparBuffer();
+
+    printf("Data de entrada (Dia/Mês/Ano)");
+    scanf("%d %d %d", & ESTADIA.entrada.dia, &ESTADIA.entrada.mes, &ESTADIA.entrada.ano);
+    limparBuffer();
+
+    printf("Data de saída (Dia/Mês/Ano)");
+    scanf("%d %d %d",& ESTADIA.saida.dia, & ESTADIA.saida.mes, &ESTADIA.saida.ano);
+    limparBuffer();
+
+    printf("Quantidade de Diárias: ");
+    scanf("%d",&ESTADIA.diarias);
+    limparBuffer();
+
+    printf("Número do quarto: ");
+    scanf("%d",&numeroquarto);
+
+    //falta procurar o quarto no arquivo
+
 }
 
-QUARTO cadastrarQuarto(){
+QUARTO cadastrarQuarto(FILE *arquivo){
+
+    printf("Cadastrar Quarto \n");
+    printf("Código do Quarto: ");
+    scanf("%d",&QUARTO.codigoQuarto);
+    limparBuffer();
+
+    printf("Quantidade de hóspedes: ");
+    scanf("%d", &QUARTO.quantidadeHospedes);
+    limparBuffer();
+
+    printf("Valor da diária: ");
+    scanf("%d",&QUARTO.valorDiaria);
+    limparBuffer();
+
+    //Escrevendo os dados do quarto no arquivo.
+    fprintf(arquivo, "Código: %d \n", QUARTO.codigoQuarto);
+    fprintf(arquivo, "Quantidade de Hóspedes: %d \n", QUARTO.quantidadeHospedes);
+    fprintf(arquivo, "Valor da diária %d \n", QUARTO.valorDiaria);
+
 }
 
 
