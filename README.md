@@ -21,6 +21,7 @@ https://github.com/orgs/trabalho-AEDS-Fundamentos/projects/1
 ![image](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/b242f571-704b-4c4e-9c40-9df36b870e43)
 
 A imagem acima, mostra a Reunião do Planejamento da Sprint 1;
+Data da Sprint 1 - Até 20/06
 
 ![WhatsApp Image 2024-06-21 at 16 54 02_38be4158](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/56772271-6ed3-40ff-92b3-ddb51e6bfe56)
 
