@@ -56,15 +56,26 @@ void limparBuffer(){
     while((c = getchar()) != '\n' && c != EOF);
 }
 
+int verificarCodigo(FILE *arquivo, int codigo){
+    CLIENTE cliente;
+
+    rewind(arquivo);
+
+    while(fscanf(arquivo, "Código: %d", &cliente.codigo) == 1){
+        if(cliente.codigo == codigo){
+            return 1;
+        }
+    }
+}
 
 CLIENTE cadastrarCliente(FILE *arquivo){
     CLIENTE cliente;
     printf("\n__Cadastro de Cliente__\n\n");
 
-    printf("Código do cliente:");
+    do{printf("Código do cliente:");
     scanf("%d", &cliente.codigo);
     limparBuffer();
-
+    }
     printf("Nome do Cliente: ");
     fgets(cliente.nome, sizeof(cliente.nome), stdin);
     cliente.nome[strcspn(cliente.nome, "\n")] = '\0';
@@ -132,7 +143,6 @@ FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
     printf("\nFuncionário cadastrado com sucesso!\n\n");
 }
 
-
 QUARTO cadastrarQuarto(FILE *arquivo){
     QUARTO quarto;
     char status[] = "desocupado";
@@ -163,6 +173,9 @@ QUARTO cadastrarQuarto(FILE *arquivo){
     fprintf(arquivo, "---------------------\n");
 
     printf("\nQuarto cadastrado com sucesso!\n\n");
+}
+
+ESTADIA reservarEstadia(){
 }
 
 /**Função que escreve as informações básicas do hotel.
