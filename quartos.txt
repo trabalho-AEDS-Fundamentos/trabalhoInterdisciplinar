@@ -1,0 +1,10 @@
+Número do quarto: 101 
+Quantidade de Hóspedes: 4 
+Valor da diária 200 
+Status: desocupado 
+---------------------
+Número do quarto: 102 
+Quantidade de Hóspedes: 6 
+Valor da diária 300 
+Status: desocupado 
+---------------------

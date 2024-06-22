@@ -31,7 +31,7 @@ typedef struct {
     char nome[40], sobrenome[50];
     int telefone;
     char cargo[30];
-    int salario;
+    float salario;
 }FUNCIONARIO;
 
 typedef struct {
@@ -45,10 +45,10 @@ typedef struct {
 }ESTADIA;
 
 typedef struct{
-    int codigoQuarto;
+    int numeroQuarto;
     int quantidadeHospedes;
     int valorDiaria;
-    int status;
+    char status[15];
 }QUARTO;
 
 void limparBuffer(){
@@ -88,33 +88,36 @@ CLIENTE cadastrarCliente(FILE *arquivo){
     fprintf(arquivo, "Endereço: %s\n", cliente.endereco);
     fprintf(arquivo, "Telefone: %d\n", cliente.telefone);
     fprintf(arquivo, "---------------------\n");
+
+    printf("\nCliente cadastrado com sucesso!\n\n");
 }
 
 FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
-
+    FUNCIONARIO funcionario;
     printf("Cadastro do Funcionário \n");
 
-    printf("Código do funcionário");
-    scanf("%d",& FUNCIONARIO.codigo);
+    printf("Código do funcionário: ");
+    scanf("%d", &funcionario.codigo);
     limparBuffer();
 
     printf("Nome do funcionário: ");
     fgets(funcionario.nome, sizeof(funcionario.nome), stdin);
     funcionario.nome[strcspn(funcionario.nome, "\n")] = '\0';
-    limparBuffer();
 
     printf("Sobrenome do funcionário: ");
-    fgets(funcionario.nome, sizeof(funcionario.sobrenome), stdin);
+    fgets(funcionario.sobrenome, sizeof(funcionario.sobrenome), stdin);
     funcionario.sobrenome[strcspn(funcionario.sobrenome, "\n")] = '\0';
-    limparBuffer();
 
     printf("Telefone do funcionário: ");
-    scanf("%d",&FUNCIONARIO.telefone);
+    scanf("%d", &funcionario.telefone);
     limparBuffer();
 
     printf("Cargo do funcionário: ");
-    fgets(funcionario.nome, sizeof(funcionario.cargo), stdin);
+    fgets(funcionario.cargo, sizeof(funcionario.cargo), stdin);
     funcionario.cargo[strcspn(funcionario.cargo, "\n")] = '\0';
+
+    printf("Salário do funcionário: R$");
+    scanf("%f", &funcionario.salario);
     limparBuffer();
 
     //Escrevendo os dados do funcionário no arquivo.
@@ -123,101 +126,77 @@ FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
     fprintf(arquivo, "Sobrenome: %s\n", funcionario.sobrenome);
     fprintf(arquivo, "Telefone: %d\n", funcionario.telefone);
     fprintf(arquivo, "Cargo: %s\n", funcionario.cargo);
-    fprintf(arquivo, "Salário: %d\n", funcionario.salario);
+    fprintf(arquivo, "Salário: R$%.2f\n", funcionario.salario);
+    fprintf(arquivo, "---------------------\n");
 
-
+    printf("\nFuncionário cadastrado com sucesso!\n\n");
 }
 
-ESTADIA reservarEstadia(){
-
-    int numeroquarto;
-    printf("Reserva de Estadia \n");
-
-    printf("Código da Estadia: ");
-    scanf("%d",&ESTADIA.codigo);
-    limparBuffer();
-
-    printf("Código do Cliente: ");
-    scanf("%d",&ESTADIA.codigoCliente);
-    limparBuffer();
-
-    printf("Data de entrada (Dia/Mês/Ano)");
-    scanf("%d %d %d", & ESTADIA.entrada.dia, &ESTADIA.entrada.mes, &ESTADIA.entrada.ano);
-    limparBuffer();
-
-    printf("Data de saída (Dia/Mês/Ano)");
-    scanf("%d %d %d",& ESTADIA.saida.dia, & ESTADIA.saida.mes, &ESTADIA.saida.ano);
-    limparBuffer();
-
-    printf("Quantidade de Diárias: ");
-    scanf("%d",&ESTADIA.diarias);
-    limparBuffer();
-
-    printf("Número do quarto: ");
-    scanf("%d",&numeroquarto);
-
-    //falta procurar o quarto no arquivo
-
-}
 
 QUARTO cadastrarQuarto(FILE *arquivo){
+    QUARTO quarto;
+    char status[] = "desocupado";
 
     printf("Cadastrar Quarto \n");
-    printf("Código do Quarto: ");
-    scanf("%d",&QUARTO.codigoQuarto);
+
+    printf("Número do Quarto: ");
+    scanf("%d", &quarto.numeroQuarto);
     limparBuffer();
 
     printf("Quantidade de hóspedes: ");
-    scanf("%d", &QUARTO.quantidadeHospedes);
+    scanf("%d", &quarto.quantidadeHospedes);
     limparBuffer();
 
     printf("Valor da diária: ");
-    scanf("%d",&QUARTO.valorDiaria);
+    scanf("%d", &quarto.valorDiaria);
     limparBuffer();
 
+    printf("Status: ");
+    fgets(quarto.status, sizeof(quarto.status), stdin);
+    quarto.status[strcspn(quarto.status, "\n")] = '\0';
+
     //Escrevendo os dados do quarto no arquivo.
-    fprintf(arquivo, "Código: %d \n", QUARTO.codigoQuarto);
-    fprintf(arquivo, "Quantidade de Hóspedes: %d \n", QUARTO.quantidadeHospedes);
-    fprintf(arquivo, "Valor da diária %d \n", QUARTO.valorDiaria);
+    fprintf(arquivo, "Número do quarto: %d \n", quarto.numeroQuarto);
+    fprintf(arquivo, "Quantidade de Hóspedes: %d \n", quarto.quantidadeHospedes);
+    fprintf(arquivo, "Valor da diária %d \n", quarto.valorDiaria);
+    fprintf(arquivo, "Status: %s \n", status);
+    fprintf(arquivo, "---------------------\n");
 
+    printf("\nQuarto cadastrado com sucesso!\n\n");
 }
-
 
 /**Função que escreve as informações básicas do hotel.
    Como parâmetro, temos o ponteiro do valor da diária.
 */
-void hotelInfo(float *valor){
+void hotelInfo(){
     printf("Informações do Hotel\n\n");
     printf("Localização: Centro de Itacaré - Bahia\n");
-    printf("Valor da diária: R$%.2f\n", *valor);
     printf("Início da diária: 14:00\n");
     printf("Fim da diária: 12:00\n");
     printf("Sejam bem-vindos ao Hotel Descanso Garantido!\nTenham uma ótima estadia!\n\n");
 }
 
 int opt(int *resp){
-    printf("O que deseja fazer?\n");
-    printf("(1) Informações do Hotel\n(2)Cadastrar Cliente\n(3) Cadastrar Quarto\n(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Finalizar\n");
+ printf("O que deseja fazer?\n");
+    printf("(1) Informações do Hotel\n(2)Cadastrar Cliente\n(3) Cadastrar Quarto\n(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Pesquisar cliente\n(7) Pesquisar Funcionário\n(8) Finalizar\n");
     scanf("%d", resp);
 
     return *resp;
 }
 
 
-
 int main()
 {
     int resp = 0;
     float valorDiaria = 100.0;
-    FILE *arquivoCliente, *arquivoFuncionario;
+    FILE *arquivoCliente, *arquivoFuncionario, *arquivoQuarto;
 
 
-    printf("\n\n___|Hotel Descanso Gárantido|___\n\n", setlocale(LC_ALL, ""));
+    printf("\n\n___|Hotel Descanso Garantido|___\n\n", setlocale(LC_ALL, ""));
     printf("Seja bem-vindo ao nosso sistema de Auto-Atendimento!\n");
 
-    while(resp != 6){
+    while(resp != 8){
     int response = opt(&resp);
-    int numClientes = 0;
     switch(response){
     case 1:
         hotelInfo(&valorDiaria);
@@ -230,18 +209,35 @@ int main()
         }
         cadastrarCliente(arquivoCliente);
         fclose(arquivoCliente);
-        numClientes++;
         break;
     case 3:
-        cadastrarQuarto();
+        arquivoQuarto = fopen("quartos.txt", "a+");
+        if(arquivoQuarto == NULL){
+            printf("Erro ao abrir o arquivo! \n");
+            break;
+        }
+        cadastrarQuarto(arquivoQuarto);
+        fclose(arquivoQuarto);
         break;
     case 4:
-        cadastrarFuncionario();
+        arquivoFuncionario = fopen("funcionarios.txt", "a+");
+        if(arquivoFuncionario == NULL){
+            printf("Erro ao abrir o arquivo.\n");
+            break;
+        }
+        cadastrarFuncionario(arquivoFuncionario);
+        fclose(arquivoFuncionario);
         break;
     case 5:
-        reservarEstadia();
+        //reservarEstadia();
         break;
     case 6:
+        //procuraCliente();
+        break;
+    case 7:
+        //procuraFuncionario();
+        break;
+    case 8:
         printf("Finalizando acesso...");
         break;
     default:

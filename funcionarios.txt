@@ -1,0 +1,7 @@
+Código: 1
+Nome: Pedro
+Sobrenome: Afonso
+Telefone: 987654321
+Cargo: Gerente
+Salário: R$10000.00
+---------------------
