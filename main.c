@@ -13,6 +13,7 @@
     -
     -
  */
+
 typedef struct {
     int dia;
     int mes;
@@ -51,6 +52,7 @@ typedef struct{
     char status[15];
 }QUARTO;
 
+
 void limparBuffer(){
     int c;
     while((c = getchar()) != '\n' && c != EOF);
@@ -68,41 +70,49 @@ int verificarCodigo(FILE *arquivo, int codigo){
     }
 }
 
+
+/** Função criada para cadastrar um novo cliente e salvar no respectivo arquivo!
+    Recebe como parâmetro o arquivo de clientes!
+*/
 CLIENTE cadastrarCliente(FILE *arquivo){
     CLIENTE cliente;
     printf("\n__Cadastro de Cliente__\n\n");
 
-    do{printf("Código do cliente:");
+    //do{
+    printf("Código do cliente:");
     scanf("%d", &cliente.codigo);
     limparBuffer();
-    }
+    fprintf(arquivo, "Código: %d\n", cliente.codigo);
+   // }
     printf("Nome do Cliente: ");
     fgets(cliente.nome, sizeof(cliente.nome), stdin);
     cliente.nome[strcspn(cliente.nome, "\n")] = '\0';
+    fprintf(arquivo, "Nome: %s\n", cliente.nome);
 
     printf("Sobrenome do cliente: ");
     fgets(cliente.sobrenome, sizeof(cliente.sobrenome), stdin);
     cliente.sobrenome[strcspn(cliente.sobrenome, "\n")] = '\0';
+    fprintf(arquivo, "Sobrenome: %s\n",cliente.sobrenome);
 
     printf("Endereço do cliente: ");
     fgets(cliente.endereco, sizeof(cliente.endereco), stdin);
     cliente.endereco[strcspn(cliente.endereco, "\n")] = '\0';
+    fprintf(arquivo, "Endereço: %s\n", cliente.endereco);
 
     printf("Telefone do cliente: ");
     scanf("%d", &cliente.telefone);
     limparBuffer();
-
-    // Escrever os dados do cliente no arquivo
-    fprintf(arquivo, "Código: %d\n", cliente.codigo);
-    fprintf(arquivo, "Nome: %s\n", cliente.nome);
-    fprintf(arquivo, "Sobrenome: %s\n",cliente.sobrenome);
-    fprintf(arquivo, "Endereço: %s\n", cliente.endereco);
     fprintf(arquivo, "Telefone: %d\n", cliente.telefone);
+
     fprintf(arquivo, "---------------------\n");
 
     printf("\nCliente cadastrado com sucesso!\n\n");
 }
 
+
+/** Função criada para cadastrar um novo funcionário e salvar no respectivo arquivo!
+    Recebe como parâmetro o arquivo de funcionários!
+*/
 FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
     FUNCIONARIO funcionario;
     printf("Cadastro do Funcionário \n");
@@ -110,39 +120,42 @@ FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
     printf("Código do funcionário: ");
     scanf("%d", &funcionario.codigo);
     limparBuffer();
+    fprintf(arquivo, "Código: %d\n", funcionario.codigo);
 
     printf("Nome do funcionário: ");
     fgets(funcionario.nome, sizeof(funcionario.nome), stdin);
     funcionario.nome[strcspn(funcionario.nome, "\n")] = '\0';
+    fprintf(arquivo, "Nome: %s\n", funcionario.nome);
 
     printf("Sobrenome do funcionário: ");
     fgets(funcionario.sobrenome, sizeof(funcionario.sobrenome), stdin);
     funcionario.sobrenome[strcspn(funcionario.sobrenome, "\n")] = '\0';
+    fprintf(arquivo, "Sobrenome: %s\n", funcionario.sobrenome);
 
     printf("Telefone do funcionário: ");
     scanf("%d", &funcionario.telefone);
     limparBuffer();
+    fprintf(arquivo, "Telefone: %d\n", funcionario.telefone);
 
     printf("Cargo do funcionário: ");
     fgets(funcionario.cargo, sizeof(funcionario.cargo), stdin);
     funcionario.cargo[strcspn(funcionario.cargo, "\n")] = '\0';
+    fprintf(arquivo, "Cargo: %s\n", funcionario.cargo);
 
     printf("Salário do funcionário: R$");
     scanf("%f", &funcionario.salario);
     limparBuffer();
-
-    //Escrevendo os dados do funcionário no arquivo.
-    fprintf(arquivo, "Código: %d\n", funcionario.codigo);
-    fprintf(arquivo, "Nome: %s\n", funcionario.nome);
-    fprintf(arquivo, "Sobrenome: %s\n", funcionario.sobrenome);
-    fprintf(arquivo, "Telefone: %d\n", funcionario.telefone);
-    fprintf(arquivo, "Cargo: %s\n", funcionario.cargo);
     fprintf(arquivo, "Salário: R$%.2f\n", funcionario.salario);
+
     fprintf(arquivo, "---------------------\n");
 
     printf("\nFuncionário cadastrado com sucesso!\n\n");
 }
 
+
+/** Função criada para cadastrar um novo quarto e salvar no respectivo arquivo!
+    Recebe como parâmetro o arquivo de quartos!
+*/
 QUARTO cadastrarQuarto(FILE *arquivo){
     QUARTO quarto;
     char status[] = "desocupado";
@@ -152,31 +165,32 @@ QUARTO cadastrarQuarto(FILE *arquivo){
     printf("Número do Quarto: ");
     scanf("%d", &quarto.numeroQuarto);
     limparBuffer();
+    fprintf(arquivo, "Número do quarto: %d \n", quarto.numeroQuarto);
 
     printf("Quantidade de hóspedes: ");
     scanf("%d", &quarto.quantidadeHospedes);
     limparBuffer();
+    fprintf(arquivo, "Quantidade de Hóspedes: %d \n", quarto.quantidadeHospedes);
 
     printf("Valor da diária: ");
     scanf("%d", &quarto.valorDiaria);
     limparBuffer();
+    fprintf(arquivo, "Valor da diária %d \n", quarto.valorDiaria);
 
     printf("Status: ");
     fgets(quarto.status, sizeof(quarto.status), stdin);
     quarto.status[strcspn(quarto.status, "\n")] = '\0';
-
-    //Escrevendo os dados do quarto no arquivo.
-    fprintf(arquivo, "Número do quarto: %d \n", quarto.numeroQuarto);
-    fprintf(arquivo, "Quantidade de Hóspedes: %d \n", quarto.quantidadeHospedes);
-    fprintf(arquivo, "Valor da diária %d \n", quarto.valorDiaria);
     fprintf(arquivo, "Status: %s \n", status);
+
     fprintf(arquivo, "---------------------\n");
 
     printf("\nQuarto cadastrado com sucesso!\n\n");
 }
 
+
 ESTADIA reservarEstadia(){
 }
+
 
 /**Função que escreve as informações básicas do hotel.
    Como parâmetro, temos o ponteiro do valor da diária.
@@ -189,6 +203,9 @@ void hotelInfo(){
     printf("Sejam bem-vindos ao Hotel Descanso Garantido!\nTenham uma ótima estadia!\n\n");
 }
 
+
+/** Função que permite ao usuário selecionar uma das opções existentes, para assim,
+realizar algo no sistema, como cadastro ou reserva*/
 int opt(int *resp){
  printf("O que deseja fazer?\n");
     printf("(1) Informações do Hotel\n(2)Cadastrar Cliente\n(3) Cadastrar Quarto\n(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Pesquisar cliente\n(7) Pesquisar Funcionário\n(8) Finalizar\n");
