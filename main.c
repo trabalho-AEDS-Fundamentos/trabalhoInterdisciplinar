@@ -4,6 +4,7 @@
 #include <locale.h>
 
 #define number 50
+#define max_funcionarios 100
 
 /** Esse programa visa solucionar o problema de garantir um bom atendimentos aos clientes do Hotel Descanso Garantido,
     a partir das principais atividades hoteleiras tais como:
@@ -187,65 +188,135 @@ QUARTO cadastrarQuarto(FILE *arquivo){
     printf("\nQuarto cadastrado com sucesso!\n\n");
 }
 
-void procurarFuncionario(FILE *arquivo)
-{
-    FUNCIONARIO funcionario;
+void procurarFuncionario(FILE *arquivo) {
+    FUNCIONARIO funcionario[max_funcionarios];
     char nome[40];
-    int codigo, encontrado=0, opcao;
+    int codigo, encontrado = 0, opcao, num_funcionario = 0;
 
     printf("\n Procurar Funcionário \n");
-    printf("Pesquisar por (1)Código (2)Nome? ");
-    scanf("%d",&opcao);
+    printf("Pesquisar por (1) Código (2) Nome ? ");
+    scanf("%d", &opcao);
     limparBuffer();
     rewind(arquivo);
-    if(opcao == 1)
-    {
-        printf("Dígite o código do funcionário: ");
-        scanf("%d",&codigo);
+
+    // Lendo os dados do arquivo
+    while (fscanf(arquivo, "Código: %d\n", &funcionario[num_funcionario].codigo) != EOF) {
+        fscanf(arquivo, "Nome: %[^\n]\n", funcionario[num_funcionario].nome);
+        fscanf(arquivo, "Sobrenome: %[^\n]\n", funcionario[num_funcionario].sobrenome);
+        fscanf(arquivo, "Telefone: %d\n", &funcionario[num_funcionario].telefone);
+        fscanf(arquivo, "Cargo: %[^\n]\n", funcionario[num_funcionario].cargo);
+        fscanf(arquivo, "Salário: R$%f\n", &funcionario[num_funcionario].salario);
+        fscanf(arquivo, "---------------------\n");
+
+        num_funcionario++;
+    }
+
+    if (opcao == 1) {
+        printf("Digite o código do funcionário: ");
+        scanf("%d", &codigo);
         limparBuffer();
-        while (fscanf(arquivo, "Código: %d\nNome: %39[^\n]\nSobrenome: %49[^\n]\nTelefone: %d\nCargo: %29[^\n]\nSalário: R$%f\n---------------------\n",&funcionario.codigo, funcionario.nome, funcionario.sobrenome, &funcionario.telefone, funcionario.cargo, &funcionario.salario) != EOF){
-            if (funcionario.codigo == codigo)
-            {
+
+        for (int i = 0; i < num_funcionario; i++) {
+            if (funcionario[i].codigo == codigo) {
                 encontrado = 1;
+                printf("\nFuncionário Encontrado:\n");
+                printf("Código: %d\n", funcionario[i].codigo);
+                printf("Nome: %s\n", funcionario[i].nome);
+                printf("Sobrenome: %s\n", funcionario[i].sobrenome);
+                printf("Telefone: %d\n", funcionario[i].telefone);
+                printf("Cargo: %s\n", funcionario[i].cargo);
+                printf("Salário: R$%.2f\n", funcionario[i].salario);
+                printf("\n");
                 break;
             }
-    }
-    }
-    else if(opcao == 2)
-        {
+        }
+    } else if (opcao == 2) {
         printf("Digite o nome do funcionário: ");
         fgets(nome, sizeof(nome), stdin);
         nome[strcspn(nome, "\n")] = '\0';
 
-        while (fscanf(arquivo, "Código: %d\nNome: %39[^\n]\nSobrenome: %49[^\n]\nTelefone: %d\nCargo: %29[^\n]\nSalário: R$%f\n---------------------\n",
-                      &funcionario.codigo, funcionario.nome, funcionario.sobrenome, &funcionario.telefone, funcionario.cargo, &funcionario.salario) != EOF) {
-            if (strcmp(funcionario.nome, nome) == 0) {
+        for (int i = 0; i < num_funcionario; i++) {
+            if (strcasecmp(funcionario[i].nome, nome) == 0) {
                 encontrado = 1;
-                break;
+                printf("\nFuncionário Encontrado:\n");
+                printf("Código: %d\n", funcionario[i].codigo);
+                printf("Nome: %s\n", funcionario[i].nome);
+                printf("Sobrenome: %s\n", funcionario[i].sobrenome);
+                printf("Telefone: %d\n", funcionario[i].telefone);
+                printf("Cargo: %s\n", funcionario[i].cargo);
+                printf("Salário: R$%.2f\n", funcionario[i].salario);
+                printf("\n");
             }
         }
     }
-    else
-    {
-        printf("Opção inválida!\n");
-        return;
+
+    if (!encontrado) {
+        printf("Funcionário não encontrado!\n");
+    }
+}
+
+void procurarCliente(FILE *arquivo){
+    CLIENTE cliente[max_funcionarios];
+    char nome[40];
+    int codigo, encontrado = 0, opcao, num_cliente = 0;
+
+    printf("\n Procurar Cliente \n");
+    printf("Pesquisar por (1) Código (2) Nome ? ");
+    scanf("%d", &opcao);
+    limparBuffer();
+    rewind(arquivo);
+
+    // Lendo os dados do arquivo
+    while (fscanf(arquivo, "Código: %d\n", &cliente[num_cliente].codigo) != EOF) {
+        fscanf(arquivo, "Nome: %[^\n]\n", cliente[num_cliente].nome);
+        fscanf(arquivo, "Sobrenome: %[^\n]\n", cliente[num_cliente].sobrenome);
+        fscanf(arquivo, "Endereço: %[^\n]\n", cliente[num_cliente].endereco);
+        fscanf(arquivo, "Telefone: %d\n", &cliente[num_cliente].telefone);
+        fscanf(arquivo, "---------------------\n");
+
+        num_cliente++;
     }
 
-    if (encontrado)
-    {
-        printf("\nFuncionário Encontrado:\n");
-        printf("Código: %d\n", funcionario.codigo);
-        printf("Nome: %s\n", funcionario.nome);
-        printf("Sobrenome: %s\n", funcionario.sobrenome);
-        printf("Telefone: %d\n", funcionario.telefone);
-        printf("Cargo: %s\n", funcionario.cargo);
-        printf("Salário: R$%.2f\n", funcionario.salario);
-    }
-    else
-    {
-        printf("Funcionário não encontrado.\n");
+    if (opcao == 1) {
+        printf("Digite o código do cliente: ");
+        scanf("%d", &codigo);
+        limparBuffer();
+
+        for (int i = 0; i < num_cliente; i++) {
+            if (cliente[i].codigo == codigo) {
+                encontrado = 1;
+                printf("\Cliente Encontrado:\n");
+                printf("Código: %d\n", cliente[i].codigo);
+                printf("Nome: %s\n", cliente[i].nome);
+                printf("Sobrenome: %s\n", cliente[i].sobrenome);
+                printf("Endereço: %s\n", cliente[i].endereco);
+                printf("Telefone: %d\n", cliente[i].telefone);
+                printf("\n");
+                break;
+            }
+        }
+    } else if (opcao == 2) {
+        printf("Digite o nome do cliente: ");
+        fgets(nome, sizeof(nome), stdin);
+        nome[strcspn(nome, "\n")] = '\0';
+
+        for (int i = 0; i < num_cliente; i++) {
+            if (strcasecmp(cliente[i].nome, nome) == 0) {
+                encontrado = 1;
+                printf("\nCliente Encontrado:\n");
+                printf("Código: %d\n", cliente[i].codigo);
+                printf("Nome: %s\n", cliente[i].nome);
+                printf("Sobrenome: %s\n", cliente[i].sobrenome);
+                printf("Endereço: %s\n", cliente[i].endereco);
+                printf("Telefone: %d\n", cliente[i].telefone);
+                printf("\n");
+            }
+        }
     }
 
+    if (!encontrado) {
+        printf("Funcionário não encontrado!\n");
+    }
 }
 
 
@@ -323,7 +394,11 @@ int main()
         //reservarEstadia();
         break;
     case 6:
-        //procuraCliente();
+        arquivoCliente = fopen("clientes.txt", "r");
+        if(arquivoCliente == NULL){
+            printf("Erro ao abrir o arquivo.\n");
+        }
+        procurarCliente(arquivoCliente);
         break;
     case 7:
          arquivoFuncionario = fopen("funcionarios.txt", "r");
@@ -331,8 +406,8 @@ int main()
                     printf("Erro ao abrir o arquivo.\n");
                     break;
                 }
-                procurarFuncionario(arquivoFuncionario);
-                fclose(arquivoFuncionario);
+        procurarFuncionario(arquivoFuncionario);
+        fclose(arquivoFuncionario);
         break;
     case 8:
         printf("Finalizando acesso...");
