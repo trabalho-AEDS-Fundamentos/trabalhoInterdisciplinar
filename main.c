@@ -187,6 +187,67 @@ QUARTO cadastrarQuarto(FILE *arquivo){
     printf("\nQuarto cadastrado com sucesso!\n\n");
 }
 
+void procurarFuncionario(FILE *arquivo)
+{
+    FUNCIONARIO funcionario;
+    char nome[40];
+    int codigo, encontrado=0, opcao;
+
+    printf("\n Procurar Funcionário \n");
+    printf("Pesquisar por (1)Código (2)Nome? ");
+    scanf("%d",&opcao);
+    limparBuffer();
+    rewind(arquivo);
+    if(opcao == 1)
+    {
+        printf("Dígite o código do funcionário: ");
+        scanf("%d",&codigo);
+        limparBuffer();
+        while (fscanf(arquivo, "Código: %d\nNome: %39[^\n]\nSobrenome: %49[^\n]\nTelefone: %d\nCargo: %29[^\n]\nSalário: R$%f\n---------------------\n",&funcionario.codigo, funcionario.nome, funcionario.sobrenome, &funcionario.telefone, funcionario.cargo, &funcionario.salario) != EOF){
+            if (funcionario.codigo == codigo)
+            {
+                encontrado = 1;
+                break;
+            }
+    }
+    }
+    else if(opcao == 2)
+        {
+        printf("Digite o nome do funcionário: ");
+        fgets(nome, sizeof(nome), stdin);
+        nome[strcspn(nome, "\n")] = '\0';
+
+        while (fscanf(arquivo, "Código: %d\nNome: %39[^\n]\nSobrenome: %49[^\n]\nTelefone: %d\nCargo: %29[^\n]\nSalário: R$%f\n---------------------\n",
+                      &funcionario.codigo, funcionario.nome, funcionario.sobrenome, &funcionario.telefone, funcionario.cargo, &funcionario.salario) != EOF) {
+            if (strcmp(funcionario.nome, nome) == 0) {
+                encontrado = 1;
+                break;
+            }
+        }
+    }
+    else
+    {
+        printf("Opção inválida!\n");
+        return;
+    }
+
+    if (encontrado)
+    {
+        printf("\nFuncionário Encontrado:\n");
+        printf("Código: %d\n", funcionario.codigo);
+        printf("Nome: %s\n", funcionario.nome);
+        printf("Sobrenome: %s\n", funcionario.sobrenome);
+        printf("Telefone: %d\n", funcionario.telefone);
+        printf("Cargo: %s\n", funcionario.cargo);
+        printf("Salário: R$%.2f\n", funcionario.salario);
+    }
+    else
+    {
+        printf("Funcionário não encontrado.\n");
+    }
+
+}
+
 
 ESTADIA reservarEstadia(){
 }
@@ -265,7 +326,13 @@ int main()
         //procuraCliente();
         break;
     case 7:
-        //procuraFuncionario();
+         arquivoFuncionario = fopen("funcionarios.txt", "r");
+                if(arquivoFuncionario == NULL){
+                    printf("Erro ao abrir o arquivo.\n");
+                    break;
+                }
+                procurarFuncionario(arquivoFuncionario);
+                fclose(arquivoFuncionario);
         break;
     case 8:
         printf("Finalizando acesso...");
