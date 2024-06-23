@@ -20,13 +20,26 @@ https://github.com/orgs/trabalho-AEDS-Fundamentos/projects/1
 
 ![image](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/8e0a3666-d861-423f-9677-9ac7283750fe)
 
-A imagem acima, mostra a Reunião do Planejamento da Sprint 1;
+A imagem acima, mostra a Reunião do Planejamento da Sprint 1
 
 Data da Sprint 1 - Até 22/06
 
 ![WhatsApp Image 2024-06-21 at 16 54 02_38be4158](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/56772271-6ed3-40ff-92b3-ddb51e6bfe56)
 
 Essa imagem mostra uma reunião para tirarmos algumas dúvidas e resolver alguns problemas encontrados durante a implementação do código!
+
+![image](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/f70d6934-3160-4a07-9127-07f06d30f2c3)
+
+
+A imagem acima, mostra a Reunião do Planejamento da Sprint 2
+
+![image](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/17985e70-85a3-4ce4-87ac-7b10065d3575)
+
+Essa imagem mostra a evolução no quadro Kanban em relação às tarefas das Sprints!
+
+
+Data da Sprint 2 - Até 25/06
+
 
 ## Casos de Teste:
 
