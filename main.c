@@ -391,34 +391,70 @@ void procurarCliente(FILE *arquivo){
 
 
 
-ESTADIA reservarEstadia(){
-    ESTADIA estadia;
-    QUARTO quarto;
-    CLIENTE cliente;
-    int qntHospedes;
+    ESTADIA reservarEstadia(FILE *arquivoQuarto, FILE *arquivoCliente){
+        ESTADIA estadia;
+        QUARTO quarto;
+        CLIENTE cliente;
+        int qntHospedes;
 
-    printf("Digite o código do cliente: ");
-    scanf("%d", &cliente.codigo);
+        arquivoCliente = fopen("clientes.txt", "r");
+        if(arquivoCliente == NULL){
+            printf("Erro ao abrir o arquivo!");
+        }
 
-    printf("Digite quantos hospédes irão se hospedar: ");
-    scanf("%d", &qntHospedes);
+        do{
+            printf("Digite o código do cliente: ");
+            scanf("%d", &cliente.codigo);
+            limparBuffer();
 
-    printf("Indique o dia de entrada: ");
-    scanf("%d", &estadia.entrada.dia);
-    printf("Indique o mês de entrada: ");
-    scanf("%d", &estadia.entrada.mes);
-    printf("Indique o ano de entrada: ");
-    scanf("%d", &estadia.entrada.ano);
+            if(verificarCodigoCliente(arquivoCliente, cliente.codigo) == 0){
+                printf("Esse cliente não está cadastrado! Insira um código válido!\n");
+            }
 
-    printf("Indique o dia de saída: ");
-    scanf("%d", &estadia.saida.dia);
-    printf("Indique o mês de saída: ");
-    scanf("%d", &estadia.saida.mes);
-    printf("Indique o ano de saída: ");
-    scanf("%d", &estadia.saida.ano);
+        }while(verificarCodigoCliente(arquivoCliente, cliente.codigo)== 0);
+
+        fclose(arquivoCliente);
+
+        printf("Digite quantos hospédes irão se hospedar: ");
+        scanf("%d", &qntHospedes);
+
+        arquivoQuarto = fopen("quartos.txt", "a+");
+        if(arquivoQuarto == NULL){
+            printf("Erro ao abrir o arquivo!");
+        }
+
+        while (fscanf(arquivo, "Número do quarto: %d\n", &quarto.numeroQuarto) == 1) {
+        fscanf(arquivo, "Quantidade de Hóspedes: %d\n", &quarto.quantidadeHospedes);
+        fscanf(arquivo, "Valor da diária: %d\n", &quarto.valorDiaria);
+        fscanf(arquivo, "Status: %[^\n]\n", quarto.status);
+        fscanf(arquivo, "---------------------\n");
+
+        if (quarto.numeroQuarto == numero) {
+            return 1; // Número do quarto já existe
+        }
+    }
+
+    return 0;
+
+        printf("Indique o dia de entrada: ");
+        scanf("%d", &estadia.entrada.dia);
+        printf("Indique o mês de entrada: ");
+        scanf("%d", &estadia.entrada.mes);
+        printf("Indique o ano de entrada: ");
+        scanf("%d", &estadia.entrada.ano);
+
+        printf("Indique o dia de saída: ");
+        scanf("%d", &estadia.saida.dia);
+        printf("Indique o mês de saída: ");
+        scanf("%d", &estadia.saida.mes);
+        printf("Indique o ano de saída: ");
+        scanf("%d", &estadia.saida.ano);
 
 
-}
+
+
+
+    }
 
 void baixaEstadia(){}
 
@@ -489,7 +525,7 @@ int main()
         fclose(arquivoFuncionario);
         break;
     case 5:
-        //reservarEstadia();
+        reservarEstadia(arquivoQuarto, arquivoCliente);
         break;
     case 6:
         arquivoCliente = fopen("clientes.txt", "r");
