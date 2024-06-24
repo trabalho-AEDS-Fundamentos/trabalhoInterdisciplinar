@@ -59,32 +59,86 @@ void limparBuffer(){
     while((c = getchar()) != '\n' && c != EOF);
 }
 
-int verificarCodigo(FILE *arquivo, int codigo){
+int verificarNumeroQuarto(FILE *arquivo, int numero) {
+    QUARTO quarto;
+    rewind(arquivo); // Rewind the file to the beginning
+
+    while (fscanf(arquivo, "Número do quarto: %d\n", &quarto.numeroQuarto) == 1) {
+        fscanf(arquivo, "Quantidade de Hóspedes: %d\n", &quarto.quantidadeHospedes);
+        fscanf(arquivo, "Valor da diária: %d\n", &quarto.valorDiaria);
+        fscanf(arquivo, "Status: %[^\n]\n", quarto.status);
+        fscanf(arquivo, "---------------------\n");
+
+        if (quarto.numeroQuarto == numero) {
+            return 1; // Número do quarto já existe
+        }
+    }
+
+    return 0; // Número do quarto não encontrado
+}
+
+int verificarCodigoCliente(FILE *arquivo, int codigo){
     CLIENTE cliente;
 
     rewind(arquivo);
 
-    while(fscanf(arquivo, "Código: %d", &cliente.codigo) == 1){
+    while(fscanf(arquivo, "Código: %d\n", &cliente.codigo) == 1){
+        fscanf(arquivo, "Nome: %[^\n]\n", cliente.nome);
+        fscanf(arquivo, "Sobrenome: %[^\n]\n", cliente.sobrenome);
+        fscanf(arquivo, "Endereço: %[^\n]\n", cliente.endereco);
+        fscanf(arquivo, "Telefone: %d\n", &cliente.telefone);
+        fscanf(arquivo, "---------------------\n");
+
         if(cliente.codigo == codigo){
             return 1;
         }
     }
+
+    return 0;
 }
+
+int verificarCodigoFuncionario(FILE *arquivo, int codigo){
+    FUNCIONARIO funcionario;
+
+    rewind(arquivo);
+
+    while(fscanf(arquivo, "Código: %d\n", &funcionario.codigo) == 1){
+        fscanf(arquivo, "Nome: %[^\n]\n", funcionario.nome);
+        fscanf(arquivo, "Sobrenome: %[^\n]\n", funcionario.sobrenome);
+        fscanf(arquivo, "Telefone: %d\n", &funcionario.telefone);
+        fscanf(arquivo, "Cargo: %[^\n]\n", funcionario.cargo);
+        fscanf(arquivo, "Salário: R$%f\n", &funcionario.salario);
+        fscanf(arquivo, "---------------------\n");
+
+        if(funcionario.codigo == codigo){
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 
 
 /** Função criada para cadastrar um novo cliente e salvar no respectivo arquivo!
     Recebe como parâmetro o arquivo de clientes!
 */
-CLIENTE cadastrarCliente(FILE *arquivo){
+void cadastrarCliente(FILE *arquivo){
     CLIENTE cliente;
-    printf("\n__Cadastro de Cliente__\n\n");
+    printf("\n_Cadastro de Cliente_\n\n");
 
-    //do{
-    printf("Código do cliente:");
-    scanf("%d", &cliente.codigo);
-    limparBuffer();
+    do{
+        printf("Código do cliente:");
+        scanf("%d", &cliente.codigo);
+        limparBuffer();
+
+        if(verificarCodigoCliente(arquivo, cliente.codigo)){
+            printf("Código já existe! Insira um novo código!\n");
+        }
+    }while(verificarCodigoCliente(arquivo, cliente.codigo));
+
     fprintf(arquivo, "Código: %d\n", cliente.codigo);
-   // }
+
     printf("Nome do Cliente: ");
     fgets(cliente.nome, sizeof(cliente.nome), stdin);
     cliente.nome[strcspn(cliente.nome, "\n")] = '\0';
@@ -114,13 +168,20 @@ CLIENTE cadastrarCliente(FILE *arquivo){
 /** Função criada para cadastrar um novo funcionário e salvar no respectivo arquivo!
     Recebe como parâmetro o arquivo de funcionários!
 */
-FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
+void cadastrarFuncionario(FILE *arquivo){
     FUNCIONARIO funcionario;
     printf("Cadastro do Funcionário \n");
 
-    printf("Código do funcionário: ");
-    scanf("%d", &funcionario.codigo);
-    limparBuffer();
+    do{
+        printf("Código do funcionário: ");
+        scanf("%d", &funcionario.codigo);
+        limparBuffer();
+
+        if(verificarCodigoFuncionario(arquivo, funcionario.codigo)){
+            printf("Código já existe! Insira um novo código!\n");
+        }
+    }while(verificarCodigoFuncionario(arquivo, funcionario.codigo));
+
     fprintf(arquivo, "Código: %d\n", funcionario.codigo);
 
     printf("Nome do funcionário: ");
@@ -157,15 +218,22 @@ FUNCIONARIO cadastrarFuncionario(FILE *arquivo){
 /** Função criada para cadastrar um novo quarto e salvar no respectivo arquivo!
     Recebe como parâmetro o arquivo de quartos!
 */
-QUARTO cadastrarQuarto(FILE *arquivo){
+void cadastrarQuarto(FILE *arquivo){
     QUARTO quarto;
     char status[] = "desocupado";
 
     printf("Cadastrar Quarto \n");
 
-    printf("Número do Quarto: ");
-    scanf("%d", &quarto.numeroQuarto);
-    limparBuffer();
+    do{
+        printf("Número do Quarto: ");
+        scanf("%d", &quarto.numeroQuarto);
+        limparBuffer();
+
+        if(verificarNumeroQuarto(arquivo, quarto.numeroQuarto)){
+            printf("Quarto já existe! Insira um novo quarto!\n");
+        }
+    } while(verificarNumeroQuarto(arquivo, quarto.numeroQuarto));
+
     fprintf(arquivo, "Número do quarto: %d \n", quarto.numeroQuarto);
 
     printf("Quantidade de hóspedes: ");
@@ -176,7 +244,7 @@ QUARTO cadastrarQuarto(FILE *arquivo){
     printf("Valor da diária: ");
     scanf("%d", &quarto.valorDiaria);
     limparBuffer();
-    fprintf(arquivo, "Valor da diária %d \n", quarto.valorDiaria);
+    fprintf(arquivo, "Valor da diária: %d \n", quarto.valorDiaria);
 
     printf("Status: ");
     fgets(quarto.status, sizeof(quarto.status), stdin);
@@ -187,6 +255,8 @@ QUARTO cadastrarQuarto(FILE *arquivo){
 
     printf("\nQuarto cadastrado com sucesso!\n\n");
 }
+
+
 
 void procurarFuncionario(FILE *arquivo) {
     FUNCIONARIO funcionario[max_funcionarios];
@@ -320,6 +390,7 @@ void procurarCliente(FILE *arquivo){
 }
 
 
+
 ESTADIA reservarEstadia(){
 }
 
@@ -340,7 +411,7 @@ void hotelInfo(){
 realizar algo no sistema, como cadastro ou reserva*/
 int opt(int *resp){
  printf("O que deseja fazer?\n");
-    printf("(1) Informações do Hotel\n(2)Cadastrar Cliente\n(3) Cadastrar Quarto\n(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Pesquisar cliente\n(7) Pesquisar Funcionário\n(8) Finalizar\n");
+    printf("(1) Informações do Hotel\n(2) Cadastrar Cliente\n(3) Cadastrar Quarto\n(4) Cadastrar Funcionário\n(5) Reservar Estadia\n(6) Pesquisar cliente\n(7) Pesquisar Funcionário\n(8) Finalizar\n");
     scanf("%d", resp);
 
     return *resp;
