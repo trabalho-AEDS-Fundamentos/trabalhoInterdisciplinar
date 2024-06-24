@@ -392,8 +392,35 @@ void procurarCliente(FILE *arquivo){
 
 
 ESTADIA reservarEstadia(){
+    ESTADIA estadia;
+    QUARTO quarto;
+    CLIENTE cliente;
+    int qntHospedes;
+
+    printf("Digite o código do cliente: ");
+    scanf("%d", &cliente.codigo);
+
+    printf("Digite quantos hospédes irão se hospedar: ");
+    scanf("%d", &qntHospedes);
+
+    printf("Indique o dia de entrada: ");
+    scanf("%d", &estadia.entrada.dia);
+    printf("Indique o mês de entrada: ");
+    scanf("%d", &estadia.entrada.mes);
+    printf("Indique o ano de entrada: ");
+    scanf("%d", &estadia.entrada.ano);
+
+    printf("Indique o dia de saída: ");
+    scanf("%d", &estadia.saida.dia);
+    printf("Indique o mês de saída: ");
+    scanf("%d", &estadia.saida.mes);
+    printf("Indique o ano de saída: ");
+    scanf("%d", &estadia.saida.ano);
+
+
 }
 
+void baixaEstadia(){}
 
 /**Função que escreve as informações básicas do hotel.
    Como parâmetro, temos o ponteiro do valor da diária.
