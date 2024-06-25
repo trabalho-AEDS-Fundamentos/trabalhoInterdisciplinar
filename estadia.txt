@@ -1,0 +1,7 @@
+Código: 6421904
+Data de Entrada: 10/05/2024
+Data de Saída: 10/06/2024
+Diárias: 30
+Código do Cliente: 1
+Número do Quarto: 101
+---------------------
