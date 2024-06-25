@@ -1,7 +1,7 @@
 Código: 1
 Nome: Guilherme
 Sobrenome: Vieira
-Endereço: Avenida Aggeo Pio Sobrinho
+Endereço: Avenida Aggeo Pio
 Telefone: 986991214
 ---------------------
 Código: 2
@@ -9,10 +9,4 @@ Nome: Lucas
 Sobrenome: Dolabela
 Endereço: Rua Conego Santana
 Telefone: 971019359
----------------------
-Código: 3
-Nome: Heitor
-Sobrenome: Monteiro
-Endereço: Rua Cassiterita 981
-Telefone: 987654321
 ---------------------

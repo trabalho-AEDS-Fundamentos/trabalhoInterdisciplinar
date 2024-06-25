@@ -1,14 +1,14 @@
 Código: 1
 Nome: Pedro
 Sobrenome: Afonso
-Telefone: 987654321
+Telefone: 946123123
 Cargo: Gerente
-Salário: R$10000.00
+Salário: R$20000.00
 ---------------------
 Código: 2
-Nome: Patric
-Sobrenome: Santos
-Telefone: 986675432
-Cargo: Recepcionista
-Salário: R$1500.00
+Nome: Luis
+Sobrenome: Pereira
+Telefone: 963271321
+Cargo: Zelador
+Salário: R$1300.00
 ---------------------
