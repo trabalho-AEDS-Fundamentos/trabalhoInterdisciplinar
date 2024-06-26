@@ -98,9 +98,45 @@ As funções e parâmetros utilizados no sistema foram:
     * Função que compara duas datas e verifica se a primeira (data1) é menor do que a segunda (data2). Recebe como parâmetro a primeira data (data1), do tipo DATA, que tem como estrutura: dia, mês e ano, e recebe a segunda data(data2), também do tipo DATA. A função retorna um código que apresenta os seguintes estados:
      0. Se a data1 não for menor ou igual a data2
      1. Se a data1 for menor ou igual a data2
-  
-
    
+11. int dataMaiorOuIgual(DATA data1, DATA data2)
+    * Função que compara duas datas e verifica se a primeira (data1) é maior do que a segunda (data2). Recebe como parâmetro a primeira data (data1), do tipo DATA, que tem como estrutura: dia, mês e ano, e recebe a segunda data(data2), também do tipo DATA. A função retorna um código que apresenta os seguintes estados:
+     0. Se a data1 não for menor ou igual a data2
+     1. Se a data1 for menor ou igual a data2
+
+12. int quartoEstaDisponivel(FILE *arquivoEstadia, int numeroQuarto, DATA entrada, DATA saida)
+    * Função que verifica se um quarto está disponível para reserva em um período específico. Recebe como parâmetro o arquivo estadia, que contém todos os dados das estadias, o número do quarto a ser verificado, a data de entrada e de saída do tipo DATA. A função retorna um código que apresenta os seguintes estados:
+      0. Se o quarto não estiver disponível
+      1. Se o quarto está disponível
+
+13. void quartosDisponiveis(FILE *arquivoQuarto, FILE *arquivoEstadia, int quantidadeHospedes, DATA entrada, DATA saida)
+    * Função que lista os quartos disponíveis para hospedagem, a partir da leitura dos dados do arquivo Quarto, considerando a quantidade de hóspedes, data de entrada e saída e o status do quarto. Recebe como parâmetros o arquivo o qual os quartos estão cadastrados, arquivo estadia, que contém os dados das estadias, quantidade de Hóspedes inseridos, a data de entrada e saída desejadas; Não possui retorno.
+
+15. int verificarCodigoEstadia(FILE *arquivoEstadia, int codigo)
+    * Função que verifica se o código da estadia já existe, impedindo mais de uma estadia com o mesmo código! Recebe como parâmetros o arquivo o qual as estadias são cadastrados e o código da estadia inserido. A função retorna um código que apresenta os seguintes estados:
+     0. Se o código da estadia não existe.
+     1. Se já existe uma estadia com determinado número.
+
+16. void reservarEstadia(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEstadia)
+     * Função que realiza a reserva de uma estadia para um cliente, verificando a disponibilidade dos quartos, salva no arquivo passado como parâmetro e atualiza o status do quarto para ocupado. Recebe como parâmetro o arquivo que contém os dados dos quartos, o arquivo que contém os dados dos cliente e o arquivo o qual as estadias serão cadastrados. Função sem retorno;
+
+17. void hotelInfo()
+    * Função que retorna as Informações Principais do Hotel, tais como Localização, início e fim da diária; Não possui parâmetros e nem retorno.
+
+18. int opt(int *resp)
+    * Função que mostra o Menu Principal, com as opções do sistema. Recebe como parâmetro o ponteiro do endereço de resp e retorna o valor do ponteiro de resp.
+
+19. int main()
+    * Função principal que inicializa os arquivos e tem uma estrutura de repetição que permite a escolha do que o usuário quer fazer no sistema, sendo essas opções:
+      - Informações do Hotel
+      - Cadastrar Cliente
+      - Cadastrar Quarto
+      - Cadastrar Quarto
+      - Cadastrar Funcionário
+      - Reservar Estadia
+      - Pesquisar Cliente
+      - Pesquisar Funcionário
+      - Finalizar
 ## Casos de Teste:
 
 
