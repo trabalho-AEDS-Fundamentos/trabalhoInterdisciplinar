@@ -12,3 +12,10 @@ Telefone: 963271321
 Cargo: Zelador
 Salário: R$1300.00
 ---------------------
+Código: 3
+Nome: Luisa
+Sobrenome: Maldor
+Telefone: 1122406639
+Cargo: CEO
+Salário: R$50000.00
+---------------------

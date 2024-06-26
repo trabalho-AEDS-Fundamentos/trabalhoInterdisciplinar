@@ -427,10 +427,11 @@ int quartoEstaDisponivel(FILE *arquivoEstadia, int numeroQuarto, DATA entrada, D
         fscanf(arquivoEstadia, "Número do Quarto: %d\n", &estadia.numeroQuarto);
         fscanf(arquivoEstadia, "---------------------\n");
 
+        // Verificar se o quarto está reservado para as datas solicitadas
         if (estadia.numeroQuarto == numeroQuarto &&
-            ((dataMaiorOuIgual(entrada, estadia.entrada) && dataMenorOuIgual(entrada, estadia.entrada)) ||
-             (dataMaiorOuIgual(saida, estadia.saida) && dataMenorOuIgual(saida, estadia.saida)) ||
-             (dataMenorOuIgual(entrada, estadia.entrada) && dataMaiorOuIgual(saida, estadia.saida)))) {
+            (dataMaiorOuIgual(entrada, estadia.entrada) && dataMenorOuIgual(entrada, estadia.saida)) ||
+            (dataMaiorOuIgual(saida, estadia.entrada) && dataMenorOuIgual(saida, estadia.saida)) ||
+            (dataMenorOuIgual(entrada, estadia.entrada) && dataMaiorOuIgual(saida, estadia.saida))) {
             return 0;
         }
     }
@@ -445,7 +446,7 @@ void quartosDisponiveis(FILE *arquivoQuarto, FILE *arquivoEstadia, int qntHosped
     printf("Quartos disponíveis: \n\n");
     while (fscanf(arquivoQuarto, "Número do quarto: %d\n", &quarto.numeroQuarto) == 1) {
         fscanf(arquivoQuarto, "Quantidade de Hóspedes: %d\n", &quarto.quantidadeHospedes);
-        fscanf(arquivoQuarto, "Valor da diária: R$%.2f\n", &quarto.valorDiaria);
+        fscanf(arquivoQuarto, "Valor da diária: R$%f\n", &quarto.valorDiaria);
         fscanf(arquivoQuarto, "Status: %[^\n]\n", quarto.status);
         fscanf(arquivoQuarto, "---------------------\n");
 
@@ -556,7 +557,7 @@ void reservarEstadia(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEst
     fprintf(arquivoEstadia, "---------------------\n");
 
     // Atualizar status do quarto para ocupado no arquivo de quartos
-    fseek(arquivoQuarto, 0, SEEK_SET);
+    rewind(arquivoQuarto);
     FILE *tempFile = fopen("temp.txt", "w");
     if (tempFile == NULL) {
         printf("Erro ao abrir arquivo temporário!\n");
@@ -566,7 +567,7 @@ void reservarEstadia(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEst
     QUARTO quarto;
     while (fscanf(arquivoQuarto, "Número do quarto: %d\n", &quarto.numeroQuarto) == 1) {
         fscanf(arquivoQuarto, "Quantidade de Hóspedes: %d\n", &quarto.quantidadeHospedes);
-        fscanf(arquivoQuarto, "Valor da diária: R$%.2f\n", &quarto.valorDiaria);
+        fscanf(arquivoQuarto, "Valor da diária: R$%f\n", &quarto.valorDiaria);
         fscanf(arquivoQuarto, "Status: %[^\n]\n", quarto.status);
         fscanf(arquivoQuarto, "---------------------\n");
 
@@ -592,7 +593,6 @@ void reservarEstadia(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEst
 
     printf("\nEstadia reservada com sucesso!\n\n");
 }
-
 
 
 
