@@ -1,7 +1,0 @@
-Código: 1
-Data de Entrada: 10/07/2024
-Data de Saída: 20/07/2024
-Diárias: 10
-Código do Cliente: 1
-Número do Quarto: 101
----------------------
