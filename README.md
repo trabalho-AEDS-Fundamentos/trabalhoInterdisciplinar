@@ -146,6 +146,24 @@ As funções e parâmetros utilizados no sistema foram:
   | Cadastro Cliente - Código Existente| Código: 1 / Nome: Pedro / Sobrenome: Santana / Endereço: Av Nossa Senhora do Carmo / Telefone: 998732154 | Já possui um cliente com esse código | Já possui um cliente com esse código |
   | Cadastrar Quarto | Número: 101 / Hóspedes: 4 / Diária: 350 | Quarto Cadastro | Quarto Cadastrado |
   | Cadastrar Quarto - Número Repetido | Número: 101 / Hóspedes: 6 / Diária: 500 | Já existe um quarto com esse número | Já existe um quarto com esse número |
-  | Cadastrar Funcionário | Código: 1 / Nome: Pedro / Sobrenome: Afonso / Telefone: 987632154 / Gerente / 20000 | Funcionário cadastrado com sucesso |  Funcionário cadastrado com sucesso |
-  | Cadastrar Funcionário - Código Existente | 1 / Caio / Oliveira / 987587324 / Cozinheiro / 5000 / Já existe funcionário com esse código |  Já existe funcionário com esse código | 
-  | Reservar Estadia | 1 / 4 / 10/07/2024 / 20/07/2024 / 101 / 1 / 
+  | Cadastrar Funcionário | Código: 1 / Nome: Pedro / Sobrenome: Afonso / Telefone: 987632154 / Cargo: Gerente / Salário: 20000 | Funcionário cadastrado com sucesso |  Funcionário cadastrado com sucesso |
+  | Cadastrar Funcionário - Código Existente | Código: 1 / Nome: Caio / Sobrenome: Oliveira / Telefone: 987587324 / Cargo: Cozinheiro / Salário: 5000 | Já existe funcionário com esse código |  Já existe funcionário com esse código | 
+  | Reservar Estadia | Código Cliente: 1 / Hóspedes: 4 / Entrada: 10/07/2024 / Saída: 20/07/2024 / Número Quarto: 101 / Código da Estadia: 1 | Estadia reservada com sucesso | Estadia reservada com sucesso|
+| Reservar Estadia - Código cliente não existente | Código Cliente: 100 / Hóspedes: 4 / Entrada: 01/12/2024 / Saída: 10/12/2024 / Número Quarto: 101 / Código da Estadia: 4 | Esse cliente não está cadastrado! | Esse cliente não está cadastrado! |
+| Reservar Estadia - Quantidade de Hóspedes maior do que a capacidade dos quartos | Código Cliente: 2 / Hóspedes: 40 / Entrada: 10/08/2024 / Saída: 30/08/2024 / Número Quarto: 101 / Código da Estadia: 2 | Nenhum quarto disponível! | Nenhum quarto disponível! |
+| Reservar Estadia - Número do quarto não existente | Código Cliente: 1 / Hóspedes: 4 / Entrada: 05/01/2025 / Saída: 15/01/2025 / Número Quarto: 1001 / Código da Estadia: 1 | Quarto não encontrado! | Quarto não encontrado! |
+| Reservar Estadia - Código de estadia repetido | Código Cliente: 3 / Hóspedes: 4 / Entrada: 15/10/2024 / Saída: 25/10/2024 / Número Quarto: 102 / Código da Estadia: 1 | Já existe uma estadia com esse código! | Já existe uma estadia com esse código! |
+| Pesquisar Cliente - Código| Opção: 1 / Código Cliente: 1 | Mostra as informações desse cliente | Mostrou as informações desse cliente |
+| Pesquisar Cliente - Código não existente| Opção: 1 / Código Cliente: 100 | Cliente não encontrado | Cliente não encontrado |
+| Pesquisar Cliente - Nome| Opção: 2 / Nome do cliente: Lucas | Mostra as informações desse cliente | Mostrou as informações desse cliente |
+| Pesquisar Cliente - Nome não existente| Opção: 2 / Nome do cliente: Jose | Cliente não encontrado! | Cliente não encontrado! |
+| Pesquisar Funcionário - Código| Opção: 1 / Código Funcionário: 1 | Mostra as informações desse funcionário | Mostrou as informações desse funcionário |
+| Pesquisar Funcionário - Código não existente| Opção: 1 / Código Cliente: 150 | Funcionário não encontrado | Funcionário não encontrado |
+| Pesquisar Funcionário - Nome| Opção: 2 / Nome do cliente: Luis | Mostra as informações desse funcionário | Mostrou as informações desse funcionário |
+| Pesquisar Funcionário - Nome não existente| Opção: 2 / Nome do cliente: Elias | Funcionário não encontrado! | Funcionário não encontrado! |
+| Dar baixa na Estadia | Código da Estadia: 1 / Confirmar: S | Baixa realizada com sucesso | Baixa realizada com sucesso | 
+| Dar baixa Estadia - Código da Estadia Não existente | Código da estadia: 999 / Estadia não encontrada | Estadia não encontrada |
+| Ocupar quarto | Código Estadia: 1 | Status alterado para ocupado! | Status alterado para ocupado! |
+| Ocupar quarto - Código Estadia não existente| Código Estadia: 100 | Estadia não encontrada | Estadia não encontrada |
+| Menu Principal - Opção inválida | Opção: 20 | Insira uma opção válida! | Insira uma opção válida! |
+
