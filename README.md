@@ -117,16 +117,33 @@ As funções e parâmetros utilizados no sistema foram:
      0. Se o código da estadia não existe.
      1. Se já existe uma estadia com determinado número.
 
-16. void reservarEstadia(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEstadia)
+16. float calcularValorEstadia(FILE *arquivoQuarto, FILE *arquivoEstadia, int codigoCliente)
+    * Função que calcula o valor total da estadia de um cliente, mutiplicando a quantidade de diárias pelo valor da diária do quarto. Recebe como parâmetros os arquivos do quarto e da estadia para leitura e o código do cliente, para calcular o valor de sua estadia. Retorna o valor total.
+   
+17. int compararDatas(DATA d1, DATA d2)
+    * Função que compara duas datas, recebe duas datas do tipo DATA e retorna a diferença entre elas (anos, meses, dias)
+   
+18. int reservasConflitam(RESERVA r1, RESERVA r2)
+    * Função que verifica se duas reservas conflitam, ou seja, se há sobreposição de datas para o mesmo quarto. Recebe como parâmetros duas reservas do tipo RESERVA. A função retorna:
+      0. Se não houver conflito.
+      1. Se houver conflito na reserva. 
+
+19. void reservarEstadiaParaData(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEstadia)
      * Função que realiza a reserva de uma estadia para um cliente, verificando a disponibilidade dos quartos, salva no arquivo passado como parâmetro e atualiza o status do quarto para ocupado. Recebe como parâmetro o arquivo que contém os dados dos quartos, o arquivo que contém os dados dos cliente e o arquivo o qual as estadias serão cadastrados. Função sem retorno;
 
-17. void hotelInfo()
+20. void darBaixaEstadia(FILE *arquivoEstadia, FILE *arquivoQuarto)
+    * Função que dá baixa em uma estadia, removendo-a e modificando o status do quarto para desocupado. Recebe como parâmetros o arquivo o qual as estadias estão cadastradas e o arquivo os quais os quartos estão cadatrados. Função sem retorno.
+
+21. void ocuparQuarto(FILE *arquivoQuarto, FILE *arquivoEstadia)
+    * Função que permite marcar um quarto como ocupado, quando os hóspedes fazerem o check-in. Recebe como parâmetros o arquivo os quais os quartos estão cadastrados e o arquivo o qual as estadias estão cadastradas. Função sem retorno.
+
+22. void hotelInfo()
     * Função que retorna as Informações Principais do Hotel, tais como Localização, início e fim da diária; Não possui parâmetros e nem retorno.
 
-18. int opt(int *resp)
+23. int opt(int *resp)
     * Função que mostra o Menu Principal, com as opções do sistema. Recebe como parâmetro o ponteiro do endereço de resp e retorna o valor do ponteiro de resp.
 
-19. int main()
+24. int main()
     * Função principal que inicializa os arquivos e tem uma estrutura de repetição que permite a escolha do que o usuário quer fazer no sistema, sendo essas opções:
       - Informações do Hotel
       - Cadastrar Cliente
