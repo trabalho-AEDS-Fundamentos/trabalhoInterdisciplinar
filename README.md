@@ -131,12 +131,21 @@ As funções e parâmetros utilizados no sistema foram:
       - Informações do Hotel
       - Cadastrar Cliente
       - Cadastrar Quarto
-      - Cadastrar Quarto
       - Cadastrar Funcionário
       - Reservar Estadia
       - Pesquisar Cliente
       - Pesquisar Funcionário
+      - Baixar Estadia
+      - Ocupar Quarto
       - Finalizar
 ## Casos de Teste:
-
-
+  
+  | Teste | Entradas | Resultado Esperado | Resultado |
+  | ----- | -------- | ------------------ | --------- |
+  | Cadastro Cliente | Código: 1 / Nome: Guilherme / Sobrenome: Vieira / Endereço: Av Afonso Pena / Telefone: 99876523| Cliente cadastrado | Cliente Cadastrado |
+  | Cadastro Cliente - Código Existente| Código: 1 / Nome: Pedro / Sobrenome: Santana / Endereço: Av Nossa Senhora do Carmo / Telefone: 998732154 | Já possui um cliente com esse código | Já possui um cliente com esse código |
+  | Cadastrar Quarto | Número: 101 / Hóspedes: 4 / Diária: 350 | Quarto Cadastro | Quarto Cadastrado |
+  | Cadastrar Quarto - Número Repetido | Número: 101 / Hóspedes: 6 / Diária: 500 | Já existe um quarto com esse número | Já existe um quarto com esse número |
+  | Cadastrar Funcionário | Código: 1 / Nome: Pedro / Sobrenome: Afonso / Telefone: 987632154 / Gerente / 20000 | Funcionário cadastrado com sucesso |  Funcionário cadastrado com sucesso |
+  | Cadastrar Funcionário - Código Existente | 1 / Caio / Oliveira / 987587324 / Cozinheiro / 5000 / Já existe funcionário com esse código |  Já existe funcionário com esse código | 
+  | Reservar Estadia | 1 / 4 / 10/07/2024 / 20/07/2024 / 101 / 1 / 
