@@ -57,6 +57,8 @@ Essa imagem mostra a evolução no quadro Kanban em relação às tarefas das Sp
 
 Data da Sprint 3 - Até 28/06
 
+![image](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/f202a7d9-2970-4885-9059-df2c59f50e13)
+
 A imagem acima mostra a Reunião ao final do trabalho! 
 
 ![image](https://github.com/trabalho-AEDS-Fundamentos/trabalhoInterdisciplinar/assets/104731949/f44185d1-9bc9-4d47-ad41-f493a97360c2)
