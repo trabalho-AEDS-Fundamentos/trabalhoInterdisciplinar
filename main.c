@@ -7,11 +7,17 @@
     #define max_funcionarios 100
     #define MAX_RESERVAS 100
 
+
+/** Estrutura que representa uma data com dia, mês e ano. */
+
     typedef struct {
         int dia;
         int mes;
         int ano;
     }DATA;
+
+
+/** Estrutura que representa um cliente com código, nome, sobrenome, endereço e telefone. */
 
     typedef struct {
         int codigo;
@@ -20,6 +26,9 @@
         int telefone;
     }CLIENTE;
 
+
+/** Estrutura que representa um funcionário com código, nome, sobrenome, telefone, cargo e salário. */
+
     typedef struct {
         int codigo;
         char nome[40], sobrenome[50];
@@ -27,6 +36,9 @@
         char cargo[30];
         float salario;
     }FUNCIONARIO;
+
+
+/** Estrutura que representa uma estadia com código, datas de entrada e saída, número de diárias, código do cliente e número do quarto. */
 
     typedef struct {
         int codigo;
@@ -38,12 +50,18 @@
 
     }ESTADIA;
 
+
+/** Estrutura que representa um quarto com número, quantidade de hóspedes, valor da diária e status. */
+
     typedef struct{
         int numeroQuarto;
         int quantidadeHospedes;
         float valorDiaria;
         char status[15];
     }QUARTO;
+
+
+/** Estrutura que representa uma reserva com código do cliente, código da estadia, número do quarto, datas de entrada e saída e número de diárias. */
 
 typedef struct {
     int codigoCliente;
@@ -54,11 +72,19 @@ typedef struct {
     int diarias;
 } RESERVA;
 
+
+/**Limpa o buffer de entrada para evitar problemas na leitura de dados pelo scanf. */
+
     void limparBuffer(){
         int c;
         while((c = getchar()) != '\n' && c != EOF);
     }
 
+
+/** Verifica se um código de cliente já está cadastrado no arquivo.
+* FILE *arquivo: Ponteiro para o arquivo que contém os dados dos clientes.
+* int codigo: Código do cliente a ser verificado.
+* Retorno: 1 se o código já existir, 0 caso contrário. */
 
     int verificarCodigoCliente(FILE *arquivo, int codigo){
         CLIENTE cliente;
@@ -79,6 +105,10 @@ typedef struct {
 
         return 0;
     }
+
+
+/** Cadastra um novo cliente no arquivo, verificando se o código do cliente já existe.
+* FILE *arquivo: Ponteiro para o arquivo que contém os dados dos clientes. */
 
     void cadastrarCliente(FILE *arquivo){
         CLIENTE cliente;
@@ -120,6 +150,11 @@ typedef struct {
 
         printf("\nCliente cadastrado com sucesso!\n\n");
     }
+
+
+/** Procura um cliente no arquivo pelo código ou nome.
+* FILE *arquivo: Ponteiro para o arquivo que contém os dados dos clientes.
+* int opcao: Opção de pesquisa (1 para código, 2 para nome). */
 
 void procurarCliente(FILE *arquivo) {
     CLIENTE cliente[max_funcionarios];
@@ -186,6 +221,10 @@ void procurarCliente(FILE *arquivo) {
 }
 
 
+/** Verifica se um código de funcionário já existe no arquivo.
+* arquivo (FILE*): Ponteiro para o arquivo que contém os registros dos funcionários.
+* codigo (int): Código do funcionário que se deseja verificar.
+* Retorna 1 se o código já existe, caso contrário, retorna 0. */
 
     int verificarCodigoFuncionario(FILE *arquivo, int codigo){
         FUNCIONARIO funcionario;
@@ -207,6 +246,10 @@ void procurarCliente(FILE *arquivo) {
 
         return 0;
     }
+
+
+/** Cadastra um novo funcionário no arquivo.
+*arquivo (FILE*): Ponteiro para o arquivo onde os registros dos funcionários serão armazenados. */
 
     void cadastrarFuncionario(FILE *arquivo){
         FUNCIONARIO funcionario;
@@ -253,6 +296,9 @@ void procurarCliente(FILE *arquivo) {
 
         printf("\nFuncionário cadastrado com sucesso!\n\n");
     }
+
+/** Procura por um funcionário no arquivo de dados dos funcionários, permitindo a busca por código ou nome.
+* arquivo (FILE*): Ponteiro para o arquivo que contém os registros dos funcionários. */
 
     void procurarFuncionario(FILE *arquivo) {
     FUNCIONARIO funcionario[max_funcionarios];
@@ -327,6 +373,10 @@ void procurarCliente(FILE *arquivo) {
 }
 
 
+/** Verifica se um número de quarto já existe no arquivo de dados dos quartos.
+* arquivo (FILE*): Ponteiro para o arquivo que contém os registros dos quartos.
+* numero (int): Número do quarto que se deseja verificar.
+* Retorna 1 se o número do quarto já existe no arquivo caso contrário  retorna 0 se o número do quarto não for encontrado no arquivo. */
 
     int verificarNumeroQuarto(FILE *arquivo, int numero) {
         QUARTO quarto;
@@ -353,6 +403,10 @@ void procurarCliente(FILE *arquivo) {
 
         return encontrado;
     }
+
+
+/**Cadastra um novo quarto no arquivo de dados dos quartos.
+* arquivo (FILE*): Ponteiro para o arquivo onde os registros dos quartos serão armazenados. */
 
     void cadastrarQuarto(FILE *arquivo) {
         QUARTO quarto;
@@ -390,6 +444,10 @@ void procurarCliente(FILE *arquivo) {
     }
 
 
+/** Compara duas datas para verificar se a primeira é menor ou igual à segunda.
+* data1 (DATA): Primeira data a ser comparada.
+* data2 (DATA): Segunda data a ser comparada.
+* Retorna 1 se a primeira data for menor ou igual à segunda caso contrário retorna 0 se a primeira data for maior que a segunda. */
 
     int dataMenorOuIgual(DATA data1, DATA data2){
        if(data1.ano < data2.ano){
@@ -411,6 +469,12 @@ void procurarCliente(FILE *arquivo) {
        }
     }
 
+
+/** Compara duas datas para verificar se a primeira é menor ou igual à segunda.
+* data1 (DATA): Primeira data a ser comparada.
+* data2 (DATA): Segunda data a ser comparada.
+* Retorna 1 se a primeira data for menor ou igual à segunda caso contrário retorna 0 se a primeira data for maior que a segunda. */
+
     int dataMaiorOuIgual(DATA data1, DATA data2){
         if(data1.ano > data2.ano){
             return 1;
@@ -431,6 +495,13 @@ void procurarCliente(FILE *arquivo) {
        }
     }
 
+/** Verifica se um quarto está disponível para um determinado período.
+* arquivoEstadia (FILE*): Ponteiro para o arquivo que contém os registros das estadias.
+* numeroQuarto (int): Número do quarto a ser verificado.
+* entrada (DATA): Data de entrada desejada.
+* saida (DATA): Data de saída desejada.
+* Retorna 1 se o quarto estiver disponível no período especificado caso contrário retorna 0 se o quarto não estiver disponível no período especificado. */
+
     int quartoEstaDisponivel(FILE *arquivoEstadia, int numeroQuarto, DATA entrada, DATA saida) {
     ESTADIA estadia;
     rewind(arquivoEstadia);
@@ -450,6 +521,14 @@ void procurarCliente(FILE *arquivo) {
     }
     return 1;
 }
+
+
+/** Exibe os quartos disponíveis para uma determinada quantidade de hóspedes e período.
+* arquivoQuarto (FILE*): Ponteiro para o arquivo que contém os registros dos quartos.
+* arquivoEstadia (FILE*): Ponteiro para o arquivo que contém os registros das estadias.
+* qntHospedes (int): Quantidade de hóspedes desejada.
+* entrada (DATA): Data de entrada desejada.
+* saida (DATA): Data de saída desejada.*/
 
 void quartosDisponiveis(FILE *arquivoQuarto, FILE *arquivoEstadia, int qntHospedes, DATA entrada, DATA saida) {
     QUARTO quarto;
@@ -490,6 +569,13 @@ void quartosDisponiveis(FILE *arquivoQuarto, FILE *arquivoEstadia, int qntHosped
     }
 }
 
+
+/** Verifica se um código de estadia já existe no arquivo de dados das estadias.
+* arquivo (FILE*): Ponteiro para o arquivo que contém os registros das estadias.
+* codigo (int): Código da estadia que se deseja verificar.
+* Retorna 1 se o código já existe no arquivo.
+* Retorna 0 se o código não for encontrado no arquivo. */
+
     int verificarCodigoEstadia(FILE *arquivo, int codigo){
         ESTADIA estadia;
 
@@ -510,6 +596,12 @@ void quartosDisponiveis(FILE *arquivoQuarto, FILE *arquivoEstadia, int qntHosped
         return 0;
     }
 
+
+/** Calcula o valor total da estadia de um cliente específico, multiplicando a quantidade de diárias pelo valor da diária do quarto correspondente.
+* arquivoQuarto (FILE*): Arquivo que contém os dados dos quartos.
+* arquivoEstadia (FILE*): Arquivo que contém os dados das estadias.
+* codigoCliente (int): Código do cliente cuja estadia será calculada.
+* (float): Valor total da estadia do cliente. */
 
 float calcularValorEstadia(FILE *arquivoQuarto, FILE *arquivoEstadia, int codigoCliente) {
     ESTADIA estadia;
@@ -545,21 +637,38 @@ float calcularValorEstadia(FILE *arquivoQuarto, FILE *arquivoEstadia, int codigo
     return valorTotal;
 }
 
-// Função para comparar duas datas
+
+/** Compara duas datas e retorna a diferença entre elas.
+*d1 (DATA): Primeira data.
+*d2 (DATA): Segunda data.
+* (int): Diferença entre as datas (anos, meses, dias). */
+
 int compararDatas(DATA d1, DATA d2) {
     if (d1.ano != d2.ano) return d1.ano - d2.ano;
     if (d1.mes != d2.mes) return d1.mes - d2.mes;
     return d1.dia - d2.dia;
 }
 
-// Função para verificar se duas reservas conflitam
+
+/** Verifica se duas reservas conflitam, ou seja, se há sobreposição de datas para o mesmo quarto.
+* r1 (RESERVA): Primeira reserva.
+* r2 (RESERVA): Segunda reserva.
+* (int): 1 se houver conflito, 0 caso contrário. */
+
 int reservasConflitam(RESERVA r1, RESERVA r2) {
     if (r1.numeroQuarto != r2.numeroQuarto) return 0;
     if (compararDatas(r1.saida, r2.entrada) <= 0 || compararDatas(r2.saida, r1.entrada) <= 0) return 0;
     return 1;
 }
 
-// Função para reservar estadia para uma data específica
+
+/** Permite que um cliente faça uma reserva para uma determinada data, verificando conflitos e disponibilidade.
+* arquivoQuarto (FILE*): Arquivo que contém os dados dos quartos.
+* arquivoCliente (FILE*): Arquivo que contém os dados dos clientes.
+* arquivoEstadia (FILE*): Arquivo que contém os dados das estadias.
+* reservas (RESERVA[]): Vetor de reservas.
+* totalReservas (int*): Ponteiro para o total de reservas. */
+
 void reservarEstadiaParaData(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEstadia, RESERVA reservas[], int *totalReservas) {
     RESERVA novaReserva;
     int qntHospedes;
@@ -643,6 +752,10 @@ void reservarEstadiaParaData(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *ar
     printf("\nEstadia reservada com sucesso!\n\n");
 }
 
+
+/** Dá baixa em uma estadia, marcando o quarto correspondente como desocupado.
+* arquivoEstadia (FILE*): Arquivo que contém os dados das estadias.
+* arquivoQuarto (FILE*): Arquivo que contém os dados dos quartos. */
 
 void darBaixaEstadia(FILE *arquivoEstadia, FILE *arquivoQuarto) {
     int codigoEstadia, encontrado = 0;
@@ -745,6 +858,11 @@ void darBaixaEstadia(FILE *arquivoEstadia, FILE *arquivoQuarto) {
     }
 }
 
+
+/** Marca um quarto como ocupado para uma estadia específica.
+* arquivoQuarto (FILE*): Arquivo que contém os dados dos quartos.
+* arquivoEstadia (FILE*): Arquivo que contém os dados das estadias. */
+
 void ocuparQuarto(FILE *arquivoQuarto, FILE *arquivoEstadia){
      rewind(arquivoQuarto);
     FILE *tempFile = fopen("temp.txt", "w");
@@ -812,7 +930,7 @@ void ocuparQuarto(FILE *arquivoQuarto, FILE *arquivoEstadia){
 }
 
 
-
+/** Exibe informações gerais sobre o hotel.*/
 
 void hotelInfo(){
     printf("Informações do Hotel\n\n");
@@ -823,6 +941,10 @@ void hotelInfo(){
 }
 
 
+/** Exibe o menu principal e captura a opção selecionada pelo usuário.
+* resp (int*): Ponteiro para a variável que armazena a opção selecionada.
+* retorna (int): Opção selecionada. */
+
 int opt(int *resp)
 {
     printf("\nMenu Principal\n");
@@ -831,6 +953,8 @@ int opt(int *resp)
     return *resp;
 }
 
+
+/** Função principal que inicializa o sistema de auto-atendimento, exibindo o menu e executando as operações correspondentes até que o usuário opte por sair.*/
 
  int main() {
     int resp = 0;
