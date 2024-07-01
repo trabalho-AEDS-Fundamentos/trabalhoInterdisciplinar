@@ -1,30 +1,20 @@
 Número do quarto: 101
 Quantidade de Hóspedes: 4
-Valor da diária: R$300,00
-Status: ocupado
----------------------
-Número do quarto: 102
-Quantidade de Hóspedes: 4
-Valor da diária: R$400,00
-Status: ocupado
----------------------
-Número do quarto: 103
-Quantidade de Hóspedes: 7
-Valor da diária: R$550,00
-Status: ocupado
----------------------
-Número do quarto: 104
-Quantidade de Hóspedes: 9
-Valor da diária: R$700,00
-Status: ocupado
----------------------
-Número do quarto: 105
-Quantidade de Hóspedes: 4
-Valor da diária: R$350,00
+Valor da diária: R$250.00
 Status: desocupado
 ---------------------
-Número do quarto: 10
+Número do quarto: 102
 Quantidade de Hóspedes: 2
-Valor da diária: R$200,00
+Valor da diária: R$150.00
+Status: desocupado
+---------------------
+Número do quarto: 103
+Quantidade de Hóspedes: 6
+Valor da diária: R$350.00
+Status: desocupado
+---------------------
+Número do quarto: 104
+Quantidade de Hóspedes: 4
+Valor da diária: R$250.00
 Status: desocupado
 ---------------------

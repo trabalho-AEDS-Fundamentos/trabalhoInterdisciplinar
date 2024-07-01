@@ -672,14 +672,12 @@ int reservasConflitam(RESERVA r1, RESERVA r2) {
 void reservarEstadiaParaData(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *arquivoEstadia, RESERVA reservas[], int *totalReservas) {
     RESERVA novaReserva;
     int qntHospedes;
-
-    printf("\n__Reservar Estadia para uma Data__\n");
+    printf("\n_Reservar Estadia para uma Data_\n");
 
     do {
         printf("Digite o código do cliente: ");
         scanf("%d", &novaReserva.codigoCliente);
         limparBuffer();
-
         if (!verificarCodigoCliente(arquivoCliente, novaReserva.codigoCliente)) {
             printf("Esse cliente não está cadastrado! Insira um código válido!\n");
         }
@@ -700,47 +698,38 @@ void reservarEstadiaParaData(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *ar
     quartosDisponiveis(arquivoQuarto, arquivoEstadia, qntHospedes, novaReserva.entrada, novaReserva.saida);
 
     do {
-        printf("Número do Quarto: ");
+        printf("Digite o número do quarto desejado: ");
         scanf("%d", &novaReserva.numeroQuarto);
         limparBuffer();
-
         if (!verificarNumeroQuarto(arquivoQuarto, novaReserva.numeroQuarto)) {
-            printf("Quarto não encontrado! Insira um quarto válido!\n");
+            printf("Esse quarto não está cadastrado! Insira um número válido!\n");
+        } else if (!quartoEstaDisponivel(arquivoEstadia, novaReserva.numeroQuarto, novaReserva.entrada, novaReserva.saida)) {
+            printf("Esse quarto já está reservado para as datas escolhidas! Escolha outro quarto ou outra data.\n");
         }
-    } while (!verificarNumeroQuarto(arquivoQuarto, novaReserva.numeroQuarto));
-
-    for (int i = 0; i < *totalReservas; i++) {
-        if (reservasConflitam(novaReserva, reservas[i])) {
-            printf("Conflito de reserva! Já existe uma reserva para o quarto %d nas datas especificadas.\n", novaReserva.numeroQuarto);
-            return;
-        }
-    }
-
-    int dias = 0;
-    if (novaReserva.entrada.mes == novaReserva.saida.mes) {
-        dias = novaReserva.saida.dia - novaReserva.entrada.dia;
-    } else {
-        dias += (30 - novaReserva.entrada.dia);
-        int meses = novaReserva.saida.mes - (novaReserva.entrada.mes + 1);
-        dias = dias + (meses * 30) + novaReserva.saida.dia;
-    }
-
-    novaReserva.diarias = dias;
+    } while (!verificarNumeroQuarto(arquivoQuarto, novaReserva.numeroQuarto) || !quartoEstaDisponivel(arquivoEstadia, novaReserva.numeroQuarto, novaReserva.entrada, novaReserva.saida));
 
     do {
         printf("Digite o código da estadia: ");
         scanf("%d", &novaReserva.codigoEstadia);
-
         limparBuffer();
-
         if (verificarCodigoEstadia(arquivoEstadia, novaReserva.codigoEstadia)) {
-            printf("Já existe uma estadia com esse código! Insira um novo código!\n");
+            printf("Esse código de estadia já está em uso! Insira um código válido!\n");
         }
     } while (verificarCodigoEstadia(arquivoEstadia, novaReserva.codigoEstadia));
 
+    novaReserva.diarias = compararDatas(novaReserva.saida, novaReserva.entrada);
+
+
+    // Adiciona a nova reserva ao array de reservas
     reservas[*totalReservas] = novaReserva;
     (*totalReservas)++;
 
+    // Atualiza o arquivo de estadias
+    arquivoEstadia = fopen("arquivo_estadia.txt", "a");
+    if (arquivoEstadia == NULL) {
+        printf("Erro ao abrir o arquivo de estadias.\n");
+        exit(1);
+    }
     fprintf(arquivoEstadia, "Código: %d\n", novaReserva.codigoEstadia);
     fprintf(arquivoEstadia, "Data de Entrada: %02d/%02d/%02d\n", novaReserva.entrada.dia, novaReserva.entrada.mes, novaReserva.entrada.ano);
     fprintf(arquivoEstadia, "Data de Saída: %02d/%02d/%02d\n", novaReserva.saida.dia, novaReserva.saida.mes, novaReserva.saida.ano);
@@ -748,8 +737,9 @@ void reservarEstadiaParaData(FILE *arquivoQuarto, FILE *arquivoCliente, FILE *ar
     fprintf(arquivoEstadia, "Código do Cliente: %d\n", novaReserva.codigoCliente);
     fprintf(arquivoEstadia, "Número do Quarto: %d\n", novaReserva.numeroQuarto);
     fprintf(arquivoEstadia, "---------------------\n");
+    fclose(arquivoEstadia);
 
-    printf("\nEstadia reservada com sucesso!\n\n");
+    printf("Reserva realizada com sucesso!\n");
 }
 
 

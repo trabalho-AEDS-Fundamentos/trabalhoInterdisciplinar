@@ -1,0 +1,22 @@
+Código: 1
+Data de Entrada: 10/05/2024
+Data de Saída: 15/05/2024
+Diárias: 5
+Código do Cliente: 1
+Número do Quarto: 101
+---------------------
+Código: 10
+Data de Entrada: 20/06/2024
+Data de Saída: 25/06/2024
+Diárias: 5
+Código do Cliente: 2
+Número do Quarto: 103
+---------------------
+Código: 5
+Data de Entrada: 15/09/2024
+Data de Saída: 20/09/2024
+Diárias: 5
+Código do Cliente: 3
+Número do Quarto: 104
+---------------------
+
