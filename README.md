@@ -14,6 +14,10 @@ Trabalho interdisciplinar das disciplinas: Algoritmos e Estrutura de Dados e Fun
 
 **Lucas Gonçalves Dolabela**
 
+## Vídeo Pitch de Apresentação
+
+<a href="https://drive.google.com/file/d/1F2mTJNBvcQNsQTIya1pFnmmBEaVXzD8a/view?usp=drive_link">Link para o Vídeo</a>
+
 ## Introdução:
 
 Software desenvolvido para facilitar a organização e melhorar a praticidade de cadastro de hóspedes para o Hotel Descanso Garantido
